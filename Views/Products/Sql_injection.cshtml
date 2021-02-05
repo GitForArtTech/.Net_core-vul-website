@@ -1,0 +1,183 @@
+﻿@model IEnumerable<firstMVC.Models.Product>
+@{
+    ViewData["Title"] = ".Net core";
+}
+<div id="sql-inj">
+    <div style="margin-right: 10%;">
+        <h3>
+            SQL Injection頁面說明
+        </h3>
+        <span>
+            輸入任一帳號顯示該帳號資訊或是<br />「 ' or '1' =
+            '1」，顯示所有帳號的資訊。
+        </span>
+        <br />
+        <br />
+        <span>
+            例如：<br /><code>帳號輸入：admin </code><br /><code>密碼輸入：admin123 </code><br />將會顯示使用者admin的資料
+        </span>
+        <span >
+            <br /><code>帳號輸入：</code><code id="SQLText" value="' or '1' ='1">' or '1' ='1</code>
+            <button class="btn" id="SQLBtn" data-clipboard-target="#SQLText">
+                <img src="~/lib/clipboards.png" width="20px;" height="20px;" alt="Copy to clipboard">
+            </button>
+            <br />
+            <code>不輸入密碼 </code>
+            <br />將會顯示所有使用者的資料
+        </span>
+    </div>
+    <table class="table table-hover" id="memberList">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    ID
+                </th>
+                <th scope="col">
+                    Name
+                </th>
+                <th scope="col">
+                    Password
+                </th>
+                <th scope="col">
+                    Message
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    1
+                </th>
+                <td>
+                    admin
+                </td>
+                <td>
+                    admin123
+                </td>
+                <td>
+                    Admin message
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    2
+                </th>
+                <td>
+                    gss
+                </td>
+                <td>
+                    gss123
+                </td>
+                <td>
+                    GSS message
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    3
+                </th>
+                <td>
+                    helen
+                </td>
+                <td>
+                    helen123
+                </td>
+                <td>
+                    Helen message
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    4
+                </th>
+                <td>
+                    dlwlrma
+                </td>
+                <td>
+                    dlwlrma123
+                </td>
+                <td>
+                    Dlwlrma message
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<div id="Login-form">
+    @using (Html.BeginForm("Sql_injection", "Products", new { ReturnUrl = Context.Request.Query["ReturnUrl"] }, FormMethod.Post, true, new { name = "myForm", autocomplete = "off" }))
+    {
+        <br />
+        <br />
+        <div id="sql-form" class="form-row">
+            <div class="form-group ">
+                <label for="inputEmail4">帳號</label>
+                <br />
+                @Html.TextBox("Name")
+            </div>
+            <div class="form-group ">
+                <label for="inputPassword4">密碼</label>
+                <br />
+                @Html.Password("Password")
+            </div>
+            <div id="Button">
+                <button class="btn btn-outline-dark" id="LoginBtn">
+                    Login
+                </button>
+            </div>
+        </div>
+    }
+
+    <!-- </form>ml-24 w-full bg-gray-800 text-white -->
+</div>
+
+@if (ViewBag.List != null)
+{
+    <div id="Login-info">登入資訊</div>
+    <table class="table " style=" margin-top: 2vh; width: 5vw;">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Message)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.List)
+            {
+                <tr>
+                    <th scope="row">
+                        @item.Id
+                    </th>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Password
+                    </td>
+                    <td>
+                        @item.Message
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<script>
+    $(document).ready(function () {
+        var SQLBtn = new ClipboardJS('#SQLBtn');
+    });
+</script>

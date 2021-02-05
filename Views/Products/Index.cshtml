@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = ".Net core";
+}
+<div id="clipDiv">
+    <code id="contentText" value="<script>alert('123')</script>">
+        &lt;script&gt;alert('123')&lt;/script&gt;
+    </code>
+    <button id="clipBtn" class="btn" data-clipboard-target="#contentText"><img src="~/lib/clipboards.png" width="20px" height="20px" alt="Copy to clipboard"></button>
+</div>
+<div>
+    <form method="get" action="" id="XSS-form">
+        <input type="text" id="formtext" name="q" placeholder="請輸入<script>alert('123')</script>" />
+        <button type="submit" class="btn btn-outline-dark">送出</button>
+    </form>
+</div>
+
+<div id="results" >您輸入的文字：</div>
+
+<script>
+    $(document).ready(function () {
+            let q = getQuery("q");
+            $("#results").append(q);
+
+            function getQuery(name) {
+                let pairs = window.location.search.substring(1).split("&");
+                let pair;
+                for (let index = 0; index < pairs.length; index++) {
+                    pair = pairs[index].split("=");
+
+                    if (decodeURIComponent(pair[0]) === name) {
+                        return decodeURIComponent(pair[1]);
+                    }
+                }
+
+                return false;
+            }
+
+        var clipboard = new ClipboardJS('#clipBtn');
+
+        @*class="input-group-text"*@
+    });
+ </script>

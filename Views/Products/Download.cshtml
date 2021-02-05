@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = ".Net core";
+}
+<div id="PTform">
+    <h3>Download頁面說明</h3>
+    <span>此頁面含有Path traversal弱點</span>
+    <br />
+    <span>專案的資料夾(wwwroot)的DownloadFolder中有test.pdf 、title.png兩種檔案提供下載</span>
+    <br />
+    <span>
+        在專案資料夾外有組態設定檔：appsettings.json，透過
+        <br />輸入
+        <code id="jsonFile" value="jsonFile">../../appsettings.json</code>
+        <button class="btn" id="jsonCilpBtn" data-clipboard-target="#jsonFile">
+            <img src="~/lib/clipboards.png" width="20px;" height="20px;" alt="Copy to clipboard">
+        </button>
+        的方式取得此檔案
+    </span>
+    <br />
+    <span>
+        輸入
+        <code id="file" value="test.pdf">test.pdf</code>
+        <button class="btn" id="downloadBtn" data-clipboard-target="#file">
+            <img src="~/lib/clipboards.png" width="20px;" height="20px;" alt="Copy to clipboard">
+        </button>
+        或
+        <code id="file2" value="title.png">title.png</code>
+        <button class="btn" id="downloadBtn" data-clipboard-target="#file2">
+            <img src="~/lib/clipboards.png" width="20px;" height="20px;" alt="Copy to clipboard">
+        </button>
+        下載檔案
+    </span>
+
+</div>
+
+<div id="Login-form">
+    @using (Html.BeginForm("Download", "Products", new { ReturnUrl = Context.Request.Query["ReturnUrl"] }, FormMethod.Post, true, new { name = "myForm", autocomplete = "off" }))
+    {
+        <br />
+        <br />
+        <div id="sql-form" class="form-row">
+            <div class="form-group ">
+                <label for="inputEmail4">檔案名稱</label>
+                <br />
+                @Html.TextBox("Filename")
+                @*<input type="email" class="form-control" id="inputAccount" placeholder="請輸入帳號" size="20">*@
+            </div>
+            <div id="Button">
+
+                <button class="btn btn-outline-dark" id="Btn">
+                    Download
+                </button>
+            </div>
+        </div>
+    }
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        var downloadBtn = new ClipboardJS('#downloadBtn');
+        var jsonCilpBtn = new ClipboardJS('#jsonCilpBtn');
+    });
+</script>

@@ -1,0 +1,63 @@
+﻿body {
+}
+
+#XSS-form {
+    position: relative;
+    width: 40vw;
+    left: 30%;
+/*    right: 50%;*/
+/*    border: black solid 2px;*/
+    display: inline-flex;
+    text-align: center;
+    padding: 5vw;
+}
+#results {
+    border: solid 2px rgba(31, 41, 55, 1);
+    position: relative;
+    width: 25vw;
+    height:20vh;
+    left: 36%;
+}
+#clipDiv {
+    position: relative;
+    width: 40vw;
+    left: 38%;
+    /*    justify-content:center;*/
+    
+}
+#clipBtn{
+    margin-left:2.5vw;
+}
+
+#sql-inj {
+    top: 15%;
+    display:flex;
+    border-bottom:dotted 2px black;
+    
+}
+
+#formtext {
+    width: 20vw;
+    margin-right: 1vw;
+}
+
+#Login-form {
+    display: inline-block;
+    width: 20vw;
+    left: 2vw;
+    top: 20%;
+    
+}
+
+#sql-form {
+    display: inline-block;
+}
+
+#memberList {
+    top: 10%;
+/*    margin-left:10%;*/
+    width: 50vw;
+}
+#Login-info{
+    margin-top:5%;
+}
